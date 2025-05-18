@@ -1,0 +1,43 @@
+BAG DATA STRUCTURE PSEUDOCODE
+
+• Set up the Bag
+  - Make a HashMap called 'items' to keep track of stuff and how many times it shows up.
+
+• Add something
+  - Look if the thing is already in items.
+    - If it’s there, add 1 to its count.
+    - If not, give it a count of 1.
+
+• Take something out
+  - Check if the thing is in items.
+    - If it is:
+      - If there’s only 1, get rid of it.
+      - If there’s more, just subtract 1 from its count.
+
+• See if something’s there
+  - Say true if the thing is in items, false if it’s not.
+
+• Count how many of something
+  - If the thing’s in items, say its count.
+  - If not, say 0.
+
+• Show what’s in the bag
+  - Start a StringBuilder with "Bag{".
+  - For each thing in items:
+    - Add the thing, a colon, its count, and a comma.
+  - If there’s stuff in items, chop off the last comma.
+  - Finish with "}".
+  - Give back the StringBuilder as a string.
+
+• Show it working
+  - Make a new Bag.
+  - Toss in: "Fighter’s Honed Broadsword", "Cleric’s Blessed Amulet", "Fighter’s Honed Broadsword", "Mage’s Arcane Orb", "Thief’s Shadow Key", "Cleric’s Blessed Amulet".
+  - Print what’s in the bag.
+  - Say if "Fighter’s Honed Broadsword" is there.
+  - Say if "Goblin Skull" is there.
+  - Say how many "Fighter’s Honed Broadsword"s.
+  - Say how many "Cleric’s Blessed Amulet"s.
+  - Take out one "Fighter’s Honed Broadsword".
+  - Print the bag again.
+  - Say if "Fighter’s Honed Broadsword" is still there.
+  - Say the new count of "Fighter’s Honed Broadsword".
