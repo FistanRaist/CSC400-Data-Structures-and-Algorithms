@@ -1,0 +1,56 @@
+BAG DATA STRUCTURE PSEUDOCODE
+
+• Set up the Bag
+  - Make a HashMap called 'items' to keep track of stuff and how many times it shows up.
+  - Mark 'items' as final so it can’t be swapped out.
+
+• Add something
+  - Look if the thing is already in items.
+    - If it’s there, add 1 to its count.
+    - If not, give it a count of 1.
+
+• Take something out
+  - Check if the thing is in items.
+    - If it is:
+      - If there’s only 1, get rid of it.
+      - If there’s more, subtract 1 from its count.
+
+• See if something’s there
+  - Say true if the thing is in items, false if it’s not.
+
+• Count how many of something
+  - If the thing’s in items, say its count.
+  - If not, say 0.
+
+• Get the total size
+  - Add up the counts of everything in items.
+  - Give back the total.
+
+• Merge another bag
+  - For each thing in the other bag:
+    - Add its count to the same thing in this bag.
+    - If it’s not in this bag, put it in with its count.
+
+• Get distinct items
+  - Make a new bag.
+  - For each thing in items:
+    - Add it to the new bag with a count of 1.
+  - Give back the new bag.
+
+• Show what’s in the bag
+  - Start a StringBuilder with "Bag{".
+  - For each thing in items:
+    - Add the thing, a colon, its count, and a comma.
+  - If there’s stuff in items, chop off the last comma.
+  - Finish with "}".
+  - Give back the StringBuilder as a string.
+
+• Show it working
+  - Make two new bags, bag1 and bag2.
+  - Toss into bag1: "Fighter’s Honed Broadsword" (twice), "Cleric’s Blessed Amulet", "Mage’s Arcane Orb".
+  - Toss into bag2: "Cleric’s Blessed Amulet" (twice), "Thief’s Shadow Key", "Fighter’s Honed Broadsword".
+  - Print how many things in bag1 and bag2.
+  - Merge bag2 into bag1.
+  - Print bag1 after merging.
+  - Make a new bag with only distinct items from bag1.
+  - Print the distinct bag.
