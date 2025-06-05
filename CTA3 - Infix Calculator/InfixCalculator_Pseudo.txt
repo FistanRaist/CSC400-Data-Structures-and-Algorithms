@@ -1,0 +1,80 @@
+Infix Calculator
+
+1. Evaluate Infix Expression:
+   Input: String expression
+   Output: Integer result
+   - Remove whitespace from expression
+   - Initialize operand stack (stores value, metadata), operator stack
+   - Set parentheses depth to 0
+   - For each character in expression:
+     * If digit, parse number, push to operand stack as simple number
+     * If '(', push to operator stack, increment depth
+     * If ')', while operator stack top is not '(', evaluate operation; pop '(', decrement depth; if no '(', error
+     * If operator, while top operator has higher precedence and not '(', evaluate operation; push operator
+     * If invalid character, throw error
+   - While operator stack not empty:
+     * If top is '(', throw error
+     * Evaluate operation
+   - If operand stack size not 1, throw error
+   - Return top operand value
+   - On error, print message, return 0
+
+2. Process File Expressions:
+   Input: File name
+   Output: None
+   - Open file
+   - Read each line
+   - If line non-empty, print line, evaluate with expression method, print result
+   - On file error, print message
+   - Close file
+
+3. Parse Number:
+   Input: String expression, integer index
+   Output: Integer value, next index
+   - Initialize empty string
+   - While character at index is digit, append to string, increment index
+   - If string empty, throw error
+   - Convert string to integer
+   - Return integer, current index
+
+4. Check Operator:
+   Input: Character
+   Output: Boolean
+   - Return true if character is '+', '-', '*', '/', or '%', else false
+
+5. Compare Precedence:
+   Input: Two characters (operators)
+   Output: Boolean
+   - Return true if first is '*', '/', or '%' and second is '+' or '-', else false
+
+6. Execute Operation:
+   Input: Operand stack, operator stack, boolean in-parentheses
+   Output: None
+   - If operand stack size < 2 or operator stack empty, throw error
+   - Pop two operands, one operator
+   - Validate operands
+   - Compute result with operator
+   - Push result to operand stack, mark as in-parentheses if true
+
+7. Validate Operands:
+   Input: Two operands
+   Output: None
+   - If either operand not simple number or parenthesized, throw error
+
+8. Perform Arithmetic:
+   Input: Two integers, character operator
+   Output: Integer
+   - If operator is '+', return sum
+   - If '-', return difference
+   - If '*', return product
+   - If '/', check second operand not 0, return quotient
+   - If '%', check second operand not 0, return remainder
+   - Else, throw error
+
+9. Test Program:
+   Input: None
+   Output: None
+   - Create calculator instance
+   - Define array of test expressions (valid, invalid)
+   - For each expression, print expression, evaluate, print result
+   - Call file processing with file name
