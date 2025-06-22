@@ -1,0 +1,40 @@
+CustomLinkedList Pseudocode
+
+1. Class CustomLinkedList
+   1.1. Initialize Node head
+   1.2. Method insert(data)
+      1.2.1. Create new Node with data
+      1.2.2. If head is null
+         1.2.2.1. Set head to new Node
+      1.2.3. Else
+         1.2.3.1. Traverse to end of list
+         1.2.3.2. Append new Node
+   1.3. Method delete(data)
+      1.3.1. If head is null
+         1.3.1.1. Return
+      1.3.2. If head.data equals data
+         1.3.2.1. Set head to head.next
+         1.3.2.2. Return
+      1.3.3. Traverse list to find node with data
+      1.3.4. If found, update next pointer to skip node
+   1.4. Method iterator()
+      1.4.1. Return new LinkedListIterator
+   1.5. Method readFromFile(filename)
+      1.5.1. Open file
+      1.5.2. While file has next line
+         1.5.2.1. Read line as integer
+         1.5.2.2. Insert integer into list
+      1.5.3. Close file
+   1.6. Class Node
+      1.6.1. int data
+      1.6.2. Node next
+   1.7. Class LinkedListIterator
+      1.7.1. Initialize Node current = head
+      1.7.2. Method hasNext()
+         1.7.2.1. Return current is not null
+      1.7.3. Method next()
+         1.7.3.1. If no next element
+            1.7.3.1.1. Throw NoSuchElementException
+         1.7.3.2. Store current data
+         1.7.3.3. Move current to next node
+         1.7.3.4. Return data
