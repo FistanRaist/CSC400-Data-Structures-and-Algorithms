@@ -1,0 +1,15 @@
+Feedback Response
+
+The feedback received for the CustomLinkedList assignment was:
+- Refine error handling in readFromFile method to provide more formal logging or specific user feedback instead of just printing to System.err.
+- Ensure delete method handles the case where data to be deleted is not present by returning a boolean indicating success or failure to make behavior more explicit.
+
+Changes Implemented
+To address the feedback, the following changes were made to the source code:
+- CustomLinkedList.java:
+  - Modified readFromFile method to throw a custom FileProcessingException with detailed error messages for IOException and NumberFormatException, replacing System.err.println.
+  - Added FileProcessingException class to encapsulate file-related errors with specific messages.
+  - Updated delete method to return a boolean indicating whether deletion was successful.
+  - Modified deleteNonHead method to return a boolean indicating if the data was found and deleted.
+  - Updated main method to check return value of delete and print feedback if deletion fails.
+These changes improve error handling robustness and make the delete operation's outcome explicit, enhancing the usability and reliability of the CustomLinkedList ADT.

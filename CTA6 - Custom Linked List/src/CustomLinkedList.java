@@ -1,8 +1,8 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * A custom implementation of a singly linked list with iterator support.
@@ -11,6 +11,19 @@ import java.util.NoSuchElementException;
  */
 public class CustomLinkedList {
     private Node head;
+
+    /**
+     * Custom exception for file processing errors.
+     */
+    private static class FileProcessingException extends Exception {
+        /**
+         * Constructs a FileProcessingException with the specified message.
+         * @param message The error message
+         */
+        FileProcessingException(String message) {
+            super(message);
+        }
+    }
 
     /**
      * Node class representing an element in the linked list.
@@ -82,14 +95,15 @@ public class CustomLinkedList {
     /**
      * Deletes the first occurrence of a node with the specified data.
      * @param data The integer value to delete
+     * @return true if deletion was successful, false if data was not found
      */
-    public void delete(int data) {
-        if (isEmpty()) return;
+    public boolean delete(int data) {
+        if (isEmpty()) return false;
         if (isHeadData(data)) {
             deleteHead();
-            return;
+            return true;
         }
-        deleteNonHead(data);
+        return deleteNonHead(data);
     }
 
     /**
@@ -111,15 +125,18 @@ public class CustomLinkedList {
     /**
      * Deletes the first non-head node with the specified data.
      * @param data The integer value to delete
+     * @return true if deletion was successful, false if data was not found
      */
-    private void deleteNonHead(int data) {
+    private boolean deleteNonHead(int data) {
         Node current = head;
         while (current.next != null && current.next.data != data) {
             current = current.next;
         }
         if (current.next != null) {
             current.next = current.next.next;
+            return true;
         }
+        return false;
     }
 
     /**
@@ -133,12 +150,15 @@ public class CustomLinkedList {
     /**
      * Reads integers from a file and inserts them into the list.
      * @param filename The name of the file to read
+     * @throws FileProcessingException If an error occurs while reading the file
      */
-    public void readFromFile(String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+    public void readFromFile(String filename) throws FileProcessingException {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/" + filename))) {
             processFileLines(br);
-        } catch (IOException | NumberFormatException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+        } catch (IOException e) {
+            throw new FileProcessingException("Failed to read file " + filename + ": " + e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new FileProcessingException("Invalid integer format in file " + filename + ": " + e.getMessage());
         }
     }
 
@@ -146,6 +166,7 @@ public class CustomLinkedList {
      * Processes lines from a BufferedReader and inserts integers.
      * @param br The BufferedReader to process
      * @throws IOException If an I/O error occurs
+     * @throws NumberFormatException If a line cannot be parsed as an integer
      */
     private void processFileLines(BufferedReader br) throws IOException {
         String line;
@@ -201,7 +222,12 @@ public class CustomLinkedList {
         CustomLinkedList linkedList = new CustomLinkedList();
         
         // Read from file
-        linkedList.readFromFile("input.txt");
+        try {
+            linkedList.readFromFile("input.txt");
+        } catch (FileProcessingException e) {
+            System.err.println("Error: " + e.getMessage());
+            return;
+        }
         
         // Insert elements
         linkedList.insert(1);
@@ -212,7 +238,10 @@ public class CustomLinkedList {
         printList(linkedList);
         
         // Delete element
-        linkedList.delete(2);
+        boolean deleted = linkedList.delete(2);
+        if (!deleted) {
+            System.out.println("Element 2 not found in the list.");
+        }
         
         // Display after deletion
         printList(linkedList);
