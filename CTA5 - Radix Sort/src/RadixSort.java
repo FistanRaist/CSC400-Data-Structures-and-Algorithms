@@ -41,7 +41,6 @@ public class RadixSort {
      * @param arr Array to sort
      * @param exp Current digit place (1, 10, 100, etc.)
      */
-    @SuppressWarnings("ManualArrayToCollectionCopy")
     private static void countingSortByDigit(Integer[] arr, int exp) {
         int n = arr.length;
         Integer[] output = new Integer[n];

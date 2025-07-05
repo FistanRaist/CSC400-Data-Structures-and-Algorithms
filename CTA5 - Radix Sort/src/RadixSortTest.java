@@ -26,8 +26,8 @@ public class RadixSortTest {
      * @param arr Array to print
      */
     private static void printArray(Integer[] arr) {
-        for (int num : arr) {
-            System.out.print(num + " ");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
         }
         System.out.println();
     }
